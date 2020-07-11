@@ -1,0 +1,13 @@
+---
+- name: Copy vlan configs to {{ ansible_hostname }}
+  copy:
+    src: "{{ ansible_hostname }}-ifcfg-vlan10"
+    dest: /etc/sysconfig/network-scripts/ifcfg-vlan10
+  when: ansible_hostname == "testServer1" or ansible_hostname == "testClient1" 
+
+- name: Copy vlan configs to {{ ansible_hostname }}
+  copy:
+    src: "{{ ansible_hostname }}-ifcfg-vlan20"
+    dest: /etc/sysconfig/network-scripts/ifcfg-vlan20
+  when:	ansible_hostname == "testServer2" or ansible_hostname == "testClient2"
+

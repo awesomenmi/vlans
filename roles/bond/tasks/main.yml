@@ -1,0 +1,51 @@
+---
+ - name: Copy bond0 config for inetRouter
+   copy:
+     src: inetRouter-ifcfg-bond0
+     dest: /etc/sysconfig/network-scripts/ifcfg-bond0
+   when: ansible_hostname == "inetRouter"
+
+ - name: Copy eth1 config for inetRouter
+   copy:
+     src: inetRouter-ifcfg-eth1
+     dest: /etc/sysconfig/network-scripts/ifcfg-eth1
+   when: ansible_hostname == "inetRouter"
+
+ - name: Copy eth2 config for inetRouter
+   copy:
+     src: inetRouter-ifcfg-eth2
+     dest: /etc/sysconfig/network-scripts/ifcfg-eth2
+   when: ansible_hostname == "inetRouter"
+
+ - name: Copy bond config for centralRouter
+   copy:
+     src: centralRouter-ifcfg-bond0
+     dest: /etc/sysconfig/network-scripts/ifcfg-bond0
+   when: ansible_hostname == "centralRouter"
+
+ - name: Copy eth4 config for centralRouter   
+   copy:
+     src: centralRouter-ifcfg-eth4
+     dest: /etc/sysconfig/network-scripts/ifcfg-eth4
+   when: ansible_hostname == "centralRouter"
+
+ - name: Copy eth5 config for centralRouter
+   copy:
+     src: centralRouter-ifcfg-eth5
+     dest: /etc/sysconfig/network-scripts/ifcfg-eth5
+   when: ansible_hostname == "centralRouter"
+
+ - name: Copy bond0:0 config for centralRouter
+   copy:
+     src: centralRouter-ifcfg-bond0:0
+     dest: /etc/sysconfig/network-scripts/ifcfg-bond0:0
+   when: ansible_hostname == "centralRouter"
+
+ - name: Copy bond0:1 config for centralRouter
+   copy:
+     src: centralRouter-ifcfg-bond0:1
+     dest: /etc/sysconfig/network-scripts/ifcfg-bond0:1
+   when: ansible_hostname == "centralRouter"
+
+
+ 

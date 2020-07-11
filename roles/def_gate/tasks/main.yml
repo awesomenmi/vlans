@@ -1,0 +1,68 @@
+---
+- name: Echo to sysctl.conf on {{ ansible_hostname }}
+  command: "echo {{ item }} >> /etc/sysctl.conf"
+  with_items:
+  - net.ipv4.ip_forward=1
+  when: ansible_hostname == "office1Router" or ansible_hostname == "office2Router"
+
+- name: Set DEFROUTE=no on {{ ansible_hostname }}
+  command: echo 'DEFROUTE=no' >> /etc/sysconfig/network-scripts/ifcfg-eth0
+
+- name: Set gateway for centralServer
+  command: echo "GATEWAY=192.168.0.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+  when: ansible_hostname == "centralServer" 
+  
+- name:	Set gateway for	office1Router
+  command: echo "GATEWAY=192.168.254.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+  when:	ansible_hostname == "office1Router"
+
+- name: Set gateway for office1Server
+  command: echo "GATEWAY=192.168.2.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+  when: ansible_hostname == "office1Server"
+
+- name: Set gateway for testServer1
+  command: echo "GATEWAY=192.168.3.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+  when: ansible_hostname == "testServer1"
+
+- name: Set gateway for testClient1
+  command: echo "GATEWAY=192.168.3.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+  when: ansible_hostname == "testClient1"
+
+- name: Set gateway for testServer2
+  command: echo "GATEWAY=192.168.3.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+  when: ansible_hostname == "testServer2"
+
+- name: Set gateway for testClient2
+  command: echo "GATEWAY=192.168.3.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+  when: ansible_hostname == "testClient2"
+
+- name: Set gateway for office2Router
+  command: echo "GATEWAY=192.168.253.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+  when: ansible_hostname == "office2Router"
+
+- name: Set gateway for office2Server
+  command: echo "GATEWAY=192.168.1.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+  when: ansible_hostname == "office2Server"
+
+- name: Restart network
+  service:
+    name: network
+    state: restarted
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+

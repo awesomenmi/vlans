@@ -1,0 +1,22 @@
+---
+- name: Setup bond and net to  inetRouter and centralRouter
+  hosts: inetRouter, centralRouter
+  become: true
+  gather_facts: True
+  roles:
+    - bond
+    - net
+
+- name: Setup VLANs
+  hosts: testClient1, testServer1, testClient2, testServer2
+  become: true
+  gather_facts: True
+  roles: 
+    - vlan
+
+- name: Setup defroute and gateway
+  hosts: centralServer, office1Router, office1Server, testServer1, testClient1, testServer2, testClient2, office2Router, office2Server
+  become: true
+  gather_facts: True
+  roles:
+    - def_gate
